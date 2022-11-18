@@ -17,4 +17,8 @@ public class ProjetAutoÉcole {
         // TODO code application logic here
     }
     
+    public void hereIsATest() {
+        
+    }
+    
 }
