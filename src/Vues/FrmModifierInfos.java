@@ -4,7 +4,10 @@
  */
 package Vues;
 
+import Entities.User;
+import java.util.Date;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,6 +15,10 @@ import javax.swing.JLabel;
  */
 public class FrmModifierInfos extends javax.swing.JFrame {
 
+    
+    User unUser;
+    
+    
     /**
      * Creates new form FrmModifierInfos
      */
@@ -82,13 +89,20 @@ public class FrmModifierInfos extends javax.swing.JFrame {
         lblEnregistrer.setForeground(new java.awt.Color(0, 51, 255));
         lblEnregistrer.setText("Enregistrer");
         lblEnregistrer.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblEnregistrer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEnregistrerMouseClicked(evt);
+            }
+        });
 
         lblRetour.setForeground(new java.awt.Color(0, 51, 255));
         lblRetour.setText("Retour");
         lblRetour.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        buttonGroup1.add(rbHomme);
         rbHomme.setText("Homme");
 
+        buttonGroup1.add(rbFemme);
         rbFemme.setText("Femme");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -137,22 +151,21 @@ public class FrmModifierInfos extends javax.swing.JFrame {
                         .addComponent(lblEnregistrer)
                         .addGap(51, 51, 51))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(84, Short.MAX_VALUE)
+                .addContainerGap(269, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblDateNaissance)
+                    .addComponent(lblPrenom)
+                    .addComponent(lblCodePostal)
+                    .addComponent(lblVille))
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblDateNaissance)
-                            .addComponent(lblPrenom)
-                            .addComponent(lblCodePostal)
-                            .addComponent(lblVille))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPrenom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dcDateNaissance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(101, 101, 101))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(165, 165, 165))))
+                    .addComponent(txtPrenom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dcDateNaissance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(101, 101, 101))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addComponent(lblTitre, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,8 +212,42 @@ public class FrmModifierInfos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        //test
+        dcDateNaissance.setDateFormatString("dd/MM/y");
+        Date uneDate = new Date();
+        unUser = new User(1, "TOLAFO", "Michel", 0, uneDate, "12 rue des Lilla", "75004", "Paris", "06 84 53 69 56");
+        txtNom.setText(unUser.getNom());
+        txtPrenom.setText(unUser.getPrenom());
+        txtCodePostal.setText(unUser.getCodePostal());
+        txtTelephone.setText(unUser.getTelephone());
+        txtAdresse.setText(unUser.getAdresse());
+        txtVille.setText(unUser.getVille());
+        dcDateNaissance.setDate(unUser.getDateDeNaissance());
+        if (unUser.getSexe() == 0) {
+            rbHomme.setSelected(true);
+        }
+        else {
+            rbFemme.setSelected(true);
+        }
     }//GEN-LAST:event_formWindowOpened
+
+    private void lblEnregistrerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnregistrerMouseClicked
+        int codeUser = unUser.getCodeUser();
+        String nom = txtNom.getText();
+        String prenom = txtPrenom.getText();
+        int sexe = 0;
+        if (rbFemme.isSelected()) {
+            sexe = 1;
+        }
+        Date dateDeNaissance = dcDateNaissance.getDate();
+        String adresse = txtAdresse.getText();
+        String codePostal = txtCodePostal.getText();
+        String ville = txtVille.getText();
+        String telephone = txtTelephone.getText();
+        
+        //Utilisation de la méthode pour UPDATE la BDD
+        
+        JOptionPane.showConfirmDialog(this, "Votre profil a bien été mis à jour", "Enregistré", JOptionPane.DEFAULT_OPTION);
+    }//GEN-LAST:event_lblEnregistrerMouseClicked
 
     /**
      * @param args the command line arguments

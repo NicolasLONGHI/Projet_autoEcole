@@ -92,27 +92,24 @@
               </Group>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="84" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="lblDateNaissance" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblPrenom" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblCodePostal" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblVille" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtPrenom" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-                          <Component id="dcDateNaissance" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="lblTitre" min="-2" pref="377" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
-                  </Group>
+              <EmptySpace pref="269" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="lblDateNaissance" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblPrenom" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCodePostal" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblVille" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="txtPrenom" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
+                  <Component id="dcDateNaissance" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
+              <Component id="lblTitre" min="-2" pref="377" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -225,6 +222,9 @@
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblEnregistrerMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblRetour">
       <Properties>
@@ -253,11 +253,17 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbHomme">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Homme"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JRadioButton" name="rbFemme">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroup1"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Femme"/>
       </Properties>
     </Component>
