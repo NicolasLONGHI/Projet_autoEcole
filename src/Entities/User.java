@@ -4,10 +4,145 @@
  */
 package Entities;
 
-/**
- *
- * @author nicol
- */
+import java.util.Date;
+
+
 public class User {
+    private int codeUser;
+    private String nom;
+    private String prenom;
+    private int sexe;
+    private Date dateDeNaissance;
+    private String adresse;
+    private String codePostal;
+    private String ville;
+    private String telephone;
+
+    /**
+     * @return the codeUser
+     */
+    public int getCodeUser() {
+        return codeUser;
+    }
+
+    /**
+     * @param codeUser the codeUser to set
+     */
+    public void setCodeUser(int codeUser) {
+        this.codeUser = codeUser;
+    }
+
+    /**
+     * @return the nom
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * @param nom the nom to set
+     */
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    /**
+     * @return the prenom
+     */
+    public String getPrenom() {
+        return prenom;
+    }
+
+    /**
+     * @param prenom the prenom to set
+     */
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    /**
+     * @return the sexe
+     */
+    public int getSexe() {
+        return sexe;
+    }
+
+    /**
+     * @param sexe the sexe to set
+     */
+    public void setSexe(int sexe) {
+        this.sexe = sexe;
+    }
+
+    /**
+     * @return the dateDeNaissance
+     */
+    public Date getDateDeNaissance() {
+        return dateDeNaissance;
+    }
+
+    /**
+     * @param dateDeNaissance the dateDeNaissance to set
+     */
+    public void setDateDeNaissance(Date dateDeNaissance) {
+        this.dateDeNaissance = dateDeNaissance;
+    }
+
+    /**
+     * @return the adresse
+     */
+    public String getAdresse() {
+        return adresse;
+    }
+
+    /**
+     * @param adresse the adresse to set
+     */
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    /**
+     * @return the codePostal
+     */
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    /**
+     * @param codePostal the codePostal to set
+     */
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    /**
+     * @return the ville
+     */
+    public String getVille() {
+        return ville;
+    }
+
+    /**
+     * @param ville the ville to set
+     */
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    /**
+     * @return the telephone
+     */
+    public String getTelephone() {
+        return telephone;
+    }
+
+    /**
+     * @param telephone the telephone to set
+     */
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+    
     
 }
