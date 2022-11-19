@@ -199,7 +199,7 @@ public class FrmModifierInfos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+        //test
     }//GEN-LAST:event_formWindowOpened
 
     /**
