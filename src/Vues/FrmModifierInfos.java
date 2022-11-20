@@ -4,8 +4,10 @@
  */
 package Vues;
 
+import Controlers.CtrlUser;
 import Entities.User;
 import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -16,13 +18,13 @@ import javax.swing.JOptionPane;
 public class FrmModifierInfos extends javax.swing.JFrame {
 
     
-    User unUser;
-    
-    
+    static User unUser;
+    CtrlUser ctrlUser;
     /**
      * Creates new form FrmModifierInfos
      */
-    public FrmModifierInfos() {
+    public FrmModifierInfos(User unUser) {
+        this.unUser = unUser;
         initComponents();
     }
 
@@ -61,6 +63,9 @@ public class FrmModifierInfos extends javax.swing.JFrame {
         setTitle("Auto NMN");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -98,6 +103,11 @@ public class FrmModifierInfos extends javax.swing.JFrame {
         lblRetour.setForeground(new java.awt.Color(0, 51, 255));
         lblRetour.setText("Retour");
         lblRetour.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblRetour.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRetourMouseClicked(evt);
+            }
+        });
 
         buttonGroup1.add(rbHomme);
         rbHomme.setText("Homme");
@@ -212,9 +222,10 @@ public class FrmModifierInfos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        ctrlUser = new CtrlUser();
         dcDateNaissance.setDateFormatString("dd/MM/y");
-        Date uneDate = new Date();
-        unUser = new User(1, "TOLAFO", "Michel", 0, uneDate, "12 rue des Lilla", "75004", "Paris", "06 84 53 69 56");
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
         txtNom.setText(unUser.getNom());
         txtPrenom.setText(unUser.getPrenom());
         txtCodePostal.setText(unUser.getCodePostal());
@@ -244,10 +255,31 @@ public class FrmModifierInfos extends javax.swing.JFrame {
         String ville = txtVille.getText();
         String telephone = txtTelephone.getText();
         
-        //Utilisation de la méthode pour UPDATE la BDD
+        unUser.setNom(nom);
+        unUser.setPrenom(prenom);
+        unUser.setSexe(sexe);
+        unUser.setDateDeNaissance(dateDeNaissance);
+        unUser.setAdresse(adresse);
+        unUser.setCodePostal(codePostal);
+        unUser.setVille(ville);
+        unUser.setTelephone(telephone);
+        
+        ctrlUser.MaJInfos(unUser);
         
         JOptionPane.showConfirmDialog(this, "Votre profil a bien été mis à jour", "Enregistré", JOptionPane.DEFAULT_OPTION);
     }//GEN-LAST:event_lblEnregistrerMouseClicked
+
+    private void lblRetourMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRetourMouseClicked
+        FrmInterfacePrincipaleMoniteur frm = new FrmInterfacePrincipaleMoniteur(unUser);
+        this.setVisible(false);
+        frm.setVisible(true);
+    }//GEN-LAST:event_lblRetourMouseClicked
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        FrmInterfacePrincipaleMoniteur frm = new FrmInterfacePrincipaleMoniteur(unUser);
+        this.setVisible(false);
+        frm.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -279,7 +311,7 @@ public class FrmModifierInfos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmModifierInfos().setVisible(true);
+                new FrmModifierInfos(unUser).setVisible(true);
             }
         });
     }

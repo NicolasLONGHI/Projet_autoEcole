@@ -4,10 +4,50 @@
  */
 package Controlers;
 
+import Entities.User;
+import Tools.ConnexionBDD;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author nicol
  */
 public class CtrlUser {
+    
+    private Connection maCnx;
+    private PreparedStatement ps;
+    private ResultSet rs;
+    
+    public CtrlUser () {
+        maCnx = ConnexionBDD.getCnx();
+    }
+    
+    public void MaJInfos(User unUser) {
+         try {
+//            ps = maCnx.prepareStatement("UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.DateDeNaissance = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;");
+            ps = maCnx.prepareStatement("UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;");
+            ps.setString(1, unUser.getNom());
+            ps.setString(2, unUser.getPrenom());
+            ps.setInt(3, unUser.getSexe());
+//            java.util.Date util_StartDate = format.parse( unUser.getDateDeNaissance() );
+//            java.sql.Date sql_StartDate = new java.sql.Date( util_StartDate.getTime() );
+//            ps.setDate(4, sql_StartDate);
+            ps.setString(4, unUser.getAdresse());
+            ps.setString(5, unUser.getCodePostal());
+            ps.setString(6, unUser.getVille());
+            ps.setString(7, unUser.getTelephone());
+            ps.setInt(8, unUser.getCodeUser());
+            ps.executeUpdate();
+            ps.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }
