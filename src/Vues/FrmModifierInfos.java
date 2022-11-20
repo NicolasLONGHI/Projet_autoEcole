@@ -242,27 +242,18 @@ public class FrmModifierInfos extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void lblEnregistrerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnregistrerMouseClicked
-        int codeUser = unUser.getCodeUser();
-        String nom = txtNom.getText();
-        String prenom = txtPrenom.getText();
+        unUser.setNom(txtNom.getText());
+        unUser.setPrenom(txtPrenom.getText());
         int sexe = 0;
         if (rbFemme.isSelected()) {
             sexe = 1;
         }
-        Date dateDeNaissance = dcDateNaissance.getDate();
-        String adresse = txtAdresse.getText();
-        String codePostal = txtCodePostal.getText();
-        String ville = txtVille.getText();
-        String telephone = txtTelephone.getText();
-        
-        unUser.setNom(nom);
-        unUser.setPrenom(prenom);
         unUser.setSexe(sexe);
-        unUser.setDateDeNaissance(dateDeNaissance);
-        unUser.setAdresse(adresse);
-        unUser.setCodePostal(codePostal);
-        unUser.setVille(ville);
-        unUser.setTelephone(telephone);
+        unUser.setDateDeNaissance(dcDateNaissance.getDate());
+        unUser.setAdresse(txtAdresse.getText());
+        unUser.setCodePostal(txtCodePostal.getText());
+        unUser.setVille(txtVille.getText());
+        unUser.setTelephone(txtTelephone.getText());
         
         ctrlUser.MaJInfos(unUser);
         

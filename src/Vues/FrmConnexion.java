@@ -5,7 +5,12 @@
  */
 package Vues;
 
+import Entities.User;
 import Tools.ConnexionBDD;
+import static Vues.FrmInterfacePrincipaleMoniteur.unUser;
+import static Vues.FrmModifierInfos.unUser;
+import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -16,6 +21,7 @@ import javax.swing.JOptionPane;
 public class FrmConnexion extends javax.swing.JFrame {
 
     ConnexionBDD maCnx;
+    static User unUser;
     
     public FrmConnexion() {
         initComponents();
@@ -66,16 +72,15 @@ public class FrmConnexion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnConnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(32, 32, 32))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,11 +116,18 @@ public class FrmConnexion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        //---- Pour les tests ----
+        Date uneDate = new Date();
+        unUser = new User(8, "Béal", "Géraldine", 1, uneDate, "12, avenue du Collège", "75004", "Paris", "0180123456", 1);
+        // ----------------
         maCnx = new ConnexionBDD();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnexionActionPerformed
-        
+        FrmInterfacePrincipaleMoniteur frm = new FrmInterfacePrincipaleMoniteur(unUser);
+        this.setVisible(false);
+        frm.setVisible(true);
     }//GEN-LAST:event_btnConnexionActionPerformed
 
     /**

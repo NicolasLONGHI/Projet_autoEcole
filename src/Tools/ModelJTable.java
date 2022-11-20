@@ -4,6 +4,7 @@
  */
 package Tools;
 
+import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
 
@@ -38,5 +39,18 @@ public class ModelJTable  extends AbstractTableModel
         return nomsColonnes[columnIndex];
     }
     
+//    public void LoadDataPlanningMoniteur(ArrayList<Ticket> uneListe) {
+//       nomsColonnes = new String[]{"Numéro", "Nom", "Date", "Etat"};
+//       rows = new Object[uneListe.size()][4];
+//       int i = 0;
+//       for (Ticket unTicket : uneListe) {
+//           rows[i][0] = unTicket.getIdTicket();
+//           rows[i][1] = unTicket.getNomTicket();
+//           rows[i][2] = unTicket.getDateTicket();
+//           rows[i][3] = unTicket.getNomEtat();
+//           i++;
+//       }
+//       fireTableChanged(null);
+//   }
 
 }

@@ -8,6 +8,7 @@ import Entities.User;
 import Tools.ConnexionBDD;
 import java.util.Date;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -17,9 +18,6 @@ import javax.swing.JFrame;
 public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
 
     static User unUser;
-    //---- Pour les tests ----
-    ConnexionBDD maCnx;
-    // ----------------
     
     /**
      * Creates new form FrmInterfacePrincipaleMoniteur
@@ -50,6 +48,9 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
         setTitle("Auto NMN");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -161,23 +162,24 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAjouterUneLicence1ActionPerformed
 
     private void lblSeDeconnecterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSeDeconnecterMouseClicked
-        unUser = null;
-        FrmConnexion frm = new FrmConnexion();
-        this.setVisible(false);
-        frm.setVisible(true);
+        seDeconnecter();
     }//GEN-LAST:event_lblSeDeconnecterMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-         //---- Pour les tests ----
-        Date uneDate = new Date();
-        unUser = new User(8, "Gnocchi", "Gwendoline", 1, uneDate, "", "75008", "Paris", "0104310779");
-        maCnx = new ConnexionBDD();
-        // ----------------
-        
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         lblTitre.setText("Bienvenue " + unUser.getPrenom());
     }//GEN-LAST:event_formWindowOpened
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        seDeconnecter();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void seDeconnecter() {
+        unUser = null;
+        FrmConnexion frm = new FrmConnexion();
+        this.setVisible(false);
+        frm.setVisible(true);
+    }
     /**
      * @param args the command line arguments
      */

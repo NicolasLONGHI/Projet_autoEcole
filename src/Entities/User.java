@@ -17,12 +17,13 @@ public class User {
     private String codePostal;
     private String ville;
     private String telephone;
+    private int statut; // 0 -> Eleve | 1 -> Moniteur | 3 -> Responsable
 
     public User() {
         
     }
     
-    public User(int unCodeUser, String unNom, String unPrenom, int unSexe, Date uneDateDeNaissance, String uneAdresse, String unCodePostal, String uneVille, String unTelephone) {
+    public User(int unCodeUser, String unNom, String unPrenom, int unSexe, Date uneDateDeNaissance, String uneAdresse, String unCodePostal, String uneVille, String unTelephone, int unStatut) {
         codeUser = unCodeUser;
         nom = unNom;
         prenom = unPrenom;
@@ -32,6 +33,7 @@ public class User {
         codePostal = unCodePostal;
         ville = uneVille;
         telephone = unTelephone;
+        statut = unStatut;
     }
     
     /**
@@ -159,6 +161,20 @@ public class User {
      */
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    /**
+     * @return the statut
+     */
+    public int getStatut() {
+        return statut;
+    }
+
+    /**
+     * @param statut the statut to set
+     */
+    public void setStatut(int statut) {
+        this.statut = statut;
     }
     
     

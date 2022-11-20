@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -29,8 +30,18 @@ public class CtrlUser {
     
     public void MaJInfos(User unUser) {
          try {
-//            ps = maCnx.prepareStatement("UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.DateDeNaissance = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;");
-            ps = maCnx.prepareStatement("UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;");
+             //"UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.DateDeNaissance = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;"
+            String requete;
+            if (unUser.getStatut() == 0) {
+                requete = "UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;";
+            }
+            else if (unUser.getStatut() == 1) {
+                requete = "UPDATE moniteur SET moniteur.Nom = ?, moniteur.Prenom = ?, moniteur.Sexe = ?, moniteur.Adresse1 = ?, moniteur.CodePostal = ?, moniteur.Ville = ?, moniteur.Telephone = ? WHERE moniteur.CodeMoniteur = ?;";
+            }
+            else {
+                requete = "responsable";
+            }
+            ps = maCnx.prepareStatement(requete);
             ps.setString(1, unUser.getNom());
             ps.setString(2, unUser.getPrenom());
             ps.setInt(3, unUser.getSexe());
@@ -44,7 +55,6 @@ public class CtrlUser {
             ps.setInt(8, unUser.getCodeUser());
             ps.executeUpdate();
             ps.close();
-            
         } catch (SQLException ex) {
             Logger.getLogger(CtrlUser.class.getName()).log(Level.SEVERE, null, ex);
         }
