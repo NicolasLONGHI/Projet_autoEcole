@@ -12,52 +12,70 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author nicol
  */
 public class CtrlUser {
-    
-    private Connection maCnx;
+    private Connection cnx;
     private PreparedStatement ps;
     private ResultSet rs;
-    
-    public CtrlUser () {
-        maCnx = ConnexionBDD.getCnx();
+
+    public CtrlUser() {
+        cnx = ConnexionBDD.getCnx();
     }
     
-    public void MaJInfos(User unUser) {
-         try {
-             //"UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.DateDeNaissance = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;"
-            String requete;
-            if (unUser.getStatut() == 0) {
-                requete = "UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;";
+    public User GetConnexionEleve(String unLogin, String unMdp){
+        User monUser = null;
+        try {
+            ps = cnx.prepareStatement("select CodeEleve, Nom, Prenom, Sexe, DateDeNaissance, Adresse1, CodePostal, Ville, Telephone FROM eleve where login = ? and mdp = ?");
+            ps.setString(1, unLogin);
+            ps.setString(2, unMdp);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                monUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
             }
-            else if (unUser.getStatut() == 1) {
-                requete = "UPDATE moniteur SET moniteur.Nom = ?, moniteur.Prenom = ?, moniteur.Sexe = ?, moniteur.Adresse1 = ?, moniteur.CodePostal = ?, moniteur.Ville = ?, moniteur.Telephone = ? WHERE moniteur.CodeMoniteur = ?;";
-            }
-            else {
-                requete = "responsable";
-            }
-            ps = maCnx.prepareStatement(requete);
-            ps.setString(1, unUser.getNom());
-            ps.setString(2, unUser.getPrenom());
-            ps.setInt(3, unUser.getSexe());
-//            java.util.Date util_StartDate = format.parse( unUser.getDateDeNaissance() );
-//            java.sql.Date sql_StartDate = new java.sql.Date( util_StartDate.getTime() );
-//            ps.setDate(4, sql_StartDate);
-            ps.setString(4, unUser.getAdresse());
-            ps.setString(5, unUser.getCodePostal());
-            ps.setString(6, unUser.getVille());
-            ps.setString(7, unUser.getTelephone());
-            ps.setInt(8, unUser.getCodeUser());
-            ps.executeUpdate();
             ps.close();
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(CtrlUser.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return monUser;
+    }
+        public User GetConnexionMoniteur(String unLogin, String unMdp){
+        User monUser = null;
+        try {
+            ps = cnx.prepareStatement("select CodeMoniteur, Nom, Prenom, Sexe, DateDeNaissance, Adresse1, CodePostal, Ville, Telephone FROM moniteur where login = ? and mdp = ?");
+            ps.setString(1, unLogin);
+            ps.setString(2, unMdp);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                monUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return monUser;
     }
     
+            public User GetConnexionResponsable(String unLogin, String unMdp){
+        User monUser = null;
+        try {
+            ps = cnx.prepareStatement("select CodeResponsable, Nom, Prenom, Sexe, DateDeNaissance, Adresse1, CodePostal, Ville, Telephone FROM responsable where login = ? and mdp = ?");
+            ps.setString(1, unLogin);
+            ps.setString(2, unMdp);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                monUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlUser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return monUser;
+    }
 }
