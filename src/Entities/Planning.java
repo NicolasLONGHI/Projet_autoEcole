@@ -18,7 +18,6 @@ public class Planning {
     private String heure;
     private double prix;
     private int reglee;
-    /*mdrrr*/
     
     public Planning (String unLibelle, String unNom, String unPrenom, Date uneDate, String uneHeure, double unPrix, int unReglee) {
         libelle = unLibelle;

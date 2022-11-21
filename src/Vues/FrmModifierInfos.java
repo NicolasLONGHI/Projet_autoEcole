@@ -4,8 +4,10 @@
  */
 package Vues;
 
+import Controlers.CtrlUser;
 import Entities.User;
 import java.util.Date;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -16,13 +18,14 @@ import javax.swing.JOptionPane;
 public class FrmModifierInfos extends javax.swing.JFrame {
 
     
-    User unUser;
-    
+    static User unUser;
+    CtrlUser ctrlUser;
     
     /**
      * Creates new form FrmModifierInfos
      */
-    public FrmModifierInfos() {
+    public FrmModifierInfos(User unUser) {
+        this.unUser = unUser;
         initComponents();
     }
 
@@ -47,7 +50,6 @@ public class FrmModifierInfos extends javax.swing.JFrame {
         lblVille = new javax.swing.JLabel();
         lblEnregistrer = new javax.swing.JLabel();
         lblRetour = new javax.swing.JLabel();
-        dcDateNaissance = new com.toedter.calendar.JDateChooser();
         txtNom = new javax.swing.JTextField();
         txtPrenom = new javax.swing.JTextField();
         txtVille = new javax.swing.JTextField();
@@ -56,11 +58,15 @@ public class FrmModifierInfos extends javax.swing.JFrame {
         txtAdresse = new javax.swing.JTextField();
         rbHomme = new javax.swing.JRadioButton();
         rbFemme = new javax.swing.JRadioButton();
+        dcDateNaissance = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Auto NMN");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -98,6 +104,11 @@ public class FrmModifierInfos extends javax.swing.JFrame {
         lblRetour.setForeground(new java.awt.Color(0, 51, 255));
         lblRetour.setText("Retour");
         lblRetour.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblRetour.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRetourMouseClicked(evt);
+            }
+        });
 
         buttonGroup1.add(rbHomme);
         rbHomme.setText("Homme");
@@ -141,10 +152,15 @@ public class FrmModifierInfos extends javax.swing.JFrame {
                                         .addComponent(rbHomme)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(rbFemme)))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtVille, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCodePostal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtVille, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCodePostal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(155, 155, 155)
+                                .addComponent(dcDateNaissance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGap(104, 104, 104))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -158,9 +174,7 @@ public class FrmModifierInfos extends javax.swing.JFrame {
                     .addComponent(lblCodePostal)
                     .addComponent(lblVille))
                 .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtPrenom, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dcDateNaissance, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(txtPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(101, 101, 101))
             .addGroup(layout.createSequentialGroup()
                 .addGap(125, 125, 125)
@@ -178,33 +192,38 @@ public class FrmModifierInfos extends javax.swing.JFrame {
                     .addComponent(lblPrenom)
                     .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtPrenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblSexe)
-                        .addComponent(lblDateNaissance)
-                        .addComponent(rbHomme)
-                        .addComponent(rbFemme))
-                    .addComponent(dcDateNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblSexe)
+                            .addComponent(lblDateNaissance)
+                            .addComponent(rbHomme)
+                            .addComponent(rbFemme)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(dcDateNaissance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblTelephone)
-                    .addComponent(lblCodePostal)
-                    .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCodePostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAdresse)
-                    .addComponent(lblVille)
-                    .addComponent(txtVille, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAdresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEnregistrer)
-                    .addComponent(lblRetour))
-                .addGap(19, 19, 19))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblTelephone)
+                            .addComponent(lblCodePostal)
+                            .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodePostal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblAdresse)
+                            .addComponent(lblVille)
+                            .addComponent(txtVille, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtAdresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblEnregistrer)
+                            .addComponent(lblRetour))
+                        .addGap(19, 19, 19))))
         );
 
         pack();
@@ -213,8 +232,9 @@ public class FrmModifierInfos extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         dcDateNaissance.setDateFormatString("dd/MM/y");
-        Date uneDate = new Date();
-        unUser = new User(1, "TOLAFO", "Michel", 0, uneDate, "12 rue des Lilla", "75004", "Paris", "06 84 53 69 56");
+        ctrlUser = new CtrlUser();
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        
         txtNom.setText(unUser.getNom());
         txtPrenom.setText(unUser.getPrenom());
         txtCodePostal.setText(unUser.getCodePostal());
@@ -231,24 +251,38 @@ public class FrmModifierInfos extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void lblEnregistrerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEnregistrerMouseClicked
-        int codeUser = unUser.getCodeUser();
-        String nom = txtNom.getText();
-        String prenom = txtPrenom.getText();
+        unUser.setNom(txtNom.getText());
+        unUser.setPrenom(txtPrenom.getText());
         int sexe = 0;
         if (rbFemme.isSelected()) {
             sexe = 1;
         }
-        Date dateDeNaissance = dcDateNaissance.getDate();
-        String adresse = txtAdresse.getText();
-        String codePostal = txtCodePostal.getText();
-        String ville = txtVille.getText();
-        String telephone = txtTelephone.getText();
+        unUser.setSexe(sexe);
+        unUser.setDateDeNaissance(dcDateNaissance.getDate());
+        unUser.setAdresse(txtAdresse.getText());
+        unUser.setCodePostal(txtCodePostal.getText());
+        unUser.setVille(txtVille.getText());
+        unUser.setTelephone(txtTelephone.getText());
         
-        //Utilisation de la méthode pour UPDATE la BDD
+        ctrlUser.MaJInfos(unUser);
         
         JOptionPane.showConfirmDialog(this, "Votre profil a bien été mis à jour", "Enregistré", JOptionPane.DEFAULT_OPTION);
     }//GEN-LAST:event_lblEnregistrerMouseClicked
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        retour();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void lblRetourMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRetourMouseClicked
+        retour();
+    }//GEN-LAST:event_lblRetourMouseClicked
+
+    private void retour() {
+        FrmInterfacePrincipale frm = new FrmInterfacePrincipale(unUser);
+        this.setVisible(false);
+        frm.setVisible(true);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -279,7 +313,7 @@ public class FrmModifierInfos extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmModifierInfos().setVisible(true);
+                new FrmModifierInfos(unUser).setVisible(true);
             }
         });
     }

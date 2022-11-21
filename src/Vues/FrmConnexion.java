@@ -8,6 +8,8 @@ package Vues;
 import Controlers.CtrlUser;
 import Entities.User;
 import Tools.ConnexionBDD;
+import java.awt.event.KeyEvent;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
@@ -57,10 +59,22 @@ public class FrmConnexion extends javax.swing.JFrame {
 
         lblMdp.setText("Mot de passe");
 
+        txtLogin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtLoginKeyPressed(evt);
+            }
+        });
+
         btnConnexion.setText("Se connecter");
         btnConnexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConnexionActionPerformed(evt);
+            }
+        });
+
+        txtMdp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMdpKeyPressed(evt);
             }
         });
 
@@ -69,27 +83,24 @@ public class FrmConnexion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnConnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addGap(151, 151, 151)
+                        .addComponent(btnConnexion, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblIdentifiant)
+                            .addComponent(lblMdp))
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblIdentifiant, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(1, 1, 1)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                            .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMdp, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(132, Short.MAX_VALUE)
                 .addComponent(lblTitre)
-                .addGap(120, 120, 120))
+                .addGap(118, 118, 118))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,9 +127,26 @@ public class FrmConnexion extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         maCnx = new ConnexionBDD();
         ctrlUser = new CtrlUser();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }//GEN-LAST:event_formWindowOpened
 
     private void btnConnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConnexionActionPerformed
+        connexion();
+    }//GEN-LAST:event_btnConnexionActionPerformed
+
+    private void txtLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtLoginKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            connexion();
+       }
+    }//GEN-LAST:event_txtLoginKeyPressed
+
+    private void txtMdpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMdpKeyPressed
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            connexion();
+       }
+    }//GEN-LAST:event_txtMdpKeyPressed
+
+    private void connexion() {
         String login = txtLogin.getText();
         String mdp = txtMdp.getText();
         if(login.compareTo("")==0){
@@ -135,16 +163,19 @@ public class FrmConnexion extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this, "Introuvable", "Login", JOptionPane.INFORMATION_MESSAGE);
                 }
                 else{
-                    JOptionPane.showMessageDialog(this, "Moniteur", "Login", JOptionPane.INFORMATION_MESSAGE);
-                }
-            }
-            else{
-                    FrmInterfaceEleve frm = new FrmInterfaceEleve(leUser);
+                    FrmInterfacePrincipale frm = new FrmInterfacePrincipale(leUser);
+                    this.setVisible(false);
                     frm.setVisible(true);
                 }
             }
-    }//GEN-LAST:event_btnConnexionActionPerformed
-
+            else{
+                    //eleve
+                    FrmInterfacePrincipale frm = new FrmInterfacePrincipale(leUser);
+                    frm.setVisible(true);
+                }
+            }
+    }
+    
     /**
      * @param args the command line arguments
      */

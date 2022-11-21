@@ -33,12 +33,12 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="490" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="611" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnStatistiqueMoniteur" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="btnModifierMesInfos1" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
-                          <Component id="btnAjouterUneLicence1" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="btnStatistique" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="btnModifierMesInfos" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
+                          <Component id="btnLeconLicence" alignment="1" min="-2" pref="150" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -68,11 +68,11 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btnModifierMesInfos1" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="btnModifierMesInfos" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAjouterUneLicence1" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="btnLeconLicence" min="-2" pref="50" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnStatistiqueMoniteur" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Component id="btnStatistique" min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="335" max="-2" attributes="0"/>
               </Group>
@@ -82,28 +82,28 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnStatistiqueMoniteur">
+    <Component class="javax.swing.JButton" name="btnStatistique">
       <Properties>
         <Property name="text" type="java.lang.String" value="Statistiques"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStatistiqueMoniteurActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStatistiqueActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnModifierMesInfos1">
+    <Component class="javax.swing.JButton" name="btnModifierMesInfos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Modifier mes infos"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifierMesInfos1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnModifierMesInfosActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnAjouterUneLicence1">
+    <Component class="javax.swing.JButton" name="btnLeconLicence">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Ajouter une licence"/>
+        <Property name="text" type="java.lang.String" value="Lecon / Licence"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAjouterUneLicence1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLeconLicenceActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -113,7 +113,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblPlanningMoniteur">
+        <Component class="javax.swing.JTable" name="tblPlanning">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="0" rowCount="0"/>

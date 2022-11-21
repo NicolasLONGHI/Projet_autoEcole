@@ -15,6 +15,7 @@
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
   </SyntheticProperties>
   <Events>
+    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
     <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
   </Events>
   <AuxValues>
@@ -77,10 +78,18 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="txtVille" min="-2" pref="130" max="-2" attributes="0"/>
-                          <Component id="txtCodePostal" min="-2" pref="130" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="txtVille" min="-2" pref="130" max="-2" attributes="0"/>
+                                  <Component id="txtCodePostal" min="-2" pref="130" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="155" max="-2" attributes="0"/>
+                              <Component id="dcDateNaissance" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                   </Group>
@@ -100,10 +109,7 @@
                   <Component id="lblVille" alignment="1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtPrenom" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-                  <Component id="dcDateNaissance" alignment="1" min="-2" pref="130" max="-2" attributes="0"/>
-              </Group>
+              <Component id="txtPrenom" min="-2" pref="130" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
@@ -125,39 +131,48 @@
                   <Component id="txtNom" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtPrenom" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="lblSexe" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDateNaissance" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="rbHomme" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="rbFemme" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblSexe" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDateNaissance" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbHomme" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="rbFemme" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <Component id="dcDateNaissance" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="dcDateNaissance" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblTelephone" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblCodePostal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtTelephone" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtCodePostal" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblTelephone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCodePostal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTelephone" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtCodePostal" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblAdresse" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblVille" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtVille" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtAdresse" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="139" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblEnregistrer" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblRetour" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblAdresse" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblVille" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtVille" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtAdresse" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="62" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblEnregistrer" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblRetour" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -236,8 +251,9 @@
           <Color id="Hand Cursor"/>
         </Property>
       </Properties>
-    </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="dcDateNaissance">
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblRetourMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNom">
     </Component>
@@ -266,6 +282,8 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Femme"/>
       </Properties>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="dcDateNaissance">
     </Component>
   </SubComponents>
 </Form>

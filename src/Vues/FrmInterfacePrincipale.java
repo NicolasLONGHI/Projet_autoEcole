@@ -4,8 +4,10 @@
  */
 package Vues;
 
+import Controlers.CtrlPlanning;
 import Entities.User;
 import Tools.ConnexionBDD;
+import Tools.ModelJTable;
 import java.util.Date;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,14 +17,16 @@ import javax.swing.JOptionPane;
  *
  * @author nicol
  */
-public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
+public class FrmInterfacePrincipale extends javax.swing.JFrame {
 
     static User unUser;
+    CtrlPlanning ctrlPlanning;
+    ModelJTable mdl;
     
     /**
      * Creates new form FrmInterfacePrincipaleMoniteur
      */
-    public FrmInterfacePrincipaleMoniteur(User unUser) {
+    public FrmInterfacePrincipale(User unUser) {
         this.unUser = unUser;
         initComponents();
     }
@@ -36,11 +40,11 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnStatistiqueMoniteur = new javax.swing.JButton();
-        btnModifierMesInfos1 = new javax.swing.JButton();
-        btnAjouterUneLicence1 = new javax.swing.JButton();
+        btnStatistique = new javax.swing.JButton();
+        btnModifierMesInfos = new javax.swing.JButton();
+        btnLeconLicence = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblPlanningMoniteur = new javax.swing.JTable();
+        tblPlanning = new javax.swing.JTable();
         lblTitre = new javax.swing.JLabel();
         lblSeDeconnecter = new javax.swing.JLabel();
 
@@ -56,28 +60,28 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
             }
         });
 
-        btnStatistiqueMoniteur.setText("Statistiques");
-        btnStatistiqueMoniteur.addActionListener(new java.awt.event.ActionListener() {
+        btnStatistique.setText("Statistiques");
+        btnStatistique.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnStatistiqueMoniteurActionPerformed(evt);
+                btnStatistiqueActionPerformed(evt);
             }
         });
 
-        btnModifierMesInfos1.setText("Modifier mes infos");
-        btnModifierMesInfos1.addActionListener(new java.awt.event.ActionListener() {
+        btnModifierMesInfos.setText("Modifier mes infos");
+        btnModifierMesInfos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModifierMesInfos1ActionPerformed(evt);
+                btnModifierMesInfosActionPerformed(evt);
             }
         });
 
-        btnAjouterUneLicence1.setText("Ajouter une licence");
-        btnAjouterUneLicence1.addActionListener(new java.awt.event.ActionListener() {
+        btnLeconLicence.setText("Lecon / Licence");
+        btnLeconLicence.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAjouterUneLicence1ActionPerformed(evt);
+                btnLeconLicenceActionPerformed(evt);
             }
         });
 
-        tblPlanningMoniteur.setModel(new javax.swing.table.DefaultTableModel(
+        tblPlanning.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -85,7 +89,7 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblPlanningMoniteur);
+        jScrollPane1.setViewportView(tblPlanning);
 
         lblTitre.setFont(new java.awt.Font("Tahoma", 1, 28)); // NOI18N
         lblTitre.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -108,12 +112,12 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnStatistiqueMoniteur, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnModifierMesInfos1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAjouterUneLicence1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnStatistique, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModifierMesInfos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnLeconLicence, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblTitre)
@@ -134,11 +138,11 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnModifierMesInfos1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnModifierMesInfos, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAjouterUneLicence1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnLeconLicence, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnStatistiqueMoniteur, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnStatistique, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
@@ -147,19 +151,29 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnStatistiqueMoniteurActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatistiqueMoniteurActionPerformed
+    private void btnStatistiqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatistiqueActionPerformed
+        if (unUser.getStatut() == 0) {
+            
+        }
+        else {
+            
+        }
+    }//GEN-LAST:event_btnStatistiqueActionPerformed
 
-    }//GEN-LAST:event_btnStatistiqueMoniteurActionPerformed
+    private void btnModifierMesInfosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierMesInfosActionPerformed
+        FrmModifierInfos frm = new FrmModifierInfos(unUser);
+        this.setVisible(false);
+        frm.setVisible(true);
+    }//GEN-LAST:event_btnModifierMesInfosActionPerformed
 
-    private void btnModifierMesInfos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierMesInfos1ActionPerformed
-        //FrmModifierInfos frm = new FrmModifierInfos(unUser);
-        //this.setVisible(false);
-        //frm.setVisible(true);
-    }//GEN-LAST:event_btnModifierMesInfos1ActionPerformed
-
-    private void btnAjouterUneLicence1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterUneLicence1ActionPerformed
-        
-    }//GEN-LAST:event_btnAjouterUneLicence1ActionPerformed
+    private void btnLeconLicenceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeconLicenceActionPerformed
+        if (unUser.getStatut() == 0) {
+            
+        }
+        else {
+            
+        }
+    }//GEN-LAST:event_btnLeconLicenceActionPerformed
 
     private void lblSeDeconnecterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblSeDeconnecterMouseClicked
         seDeconnecter();
@@ -168,6 +182,17 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         lblTitre.setText("Bienvenue " + unUser.getPrenom());
+        ctrlPlanning = new CtrlPlanning();
+        
+        if (unUser.getStatut() == 0) {
+            btnLeconLicence.setText("Reserver une leçon");
+        }
+        else {
+            btnLeconLicence.setText("Ajouter une licence");
+            mdl = new ModelJTable();
+            mdl.LoadDataPLanning(ctrlPlanning.getPlanningByMoniteurId(unUser.getCodeUser()));
+            tblPlanning.setModel(mdl);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -197,31 +222,32 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmInterfacePrincipaleMoniteur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInterfacePrincipale.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmInterfacePrincipaleMoniteur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInterfacePrincipale.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmInterfacePrincipaleMoniteur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInterfacePrincipale.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmInterfacePrincipaleMoniteur.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmInterfacePrincipale.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmInterfacePrincipaleMoniteur(unUser).setVisible(true);
+                new FrmInterfacePrincipale(unUser).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAjouterUneLicence1;
-    private javax.swing.JButton btnModifierMesInfos1;
-    private javax.swing.JButton btnStatistiqueMoniteur;
+    private javax.swing.JButton btnLeconLicence;
+    private javax.swing.JButton btnModifierMesInfos;
+    private javax.swing.JButton btnStatistique;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblSeDeconnecter;
     private javax.swing.JLabel lblTitre;
-    private javax.swing.JTable tblPlanningMoniteur;
+    private javax.swing.JTable tblPlanning;
     // End of variables declaration//GEN-END:variables
 }
