@@ -152,9 +152,9 @@ public class FrmInterfacePrincipaleMoniteur extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStatistiqueMoniteurActionPerformed
 
     private void btnModifierMesInfos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifierMesInfos1ActionPerformed
-        FrmModifierInfos frm = new FrmModifierInfos(unUser);
-        this.setVisible(false);
-        frm.setVisible(true);
+        //FrmModifierInfos frm = new FrmModifierInfos(unUser);
+        //this.setVisible(false);
+        //frm.setVisible(true);
     }//GEN-LAST:event_btnModifierMesInfos1ActionPerformed
 
     private void btnAjouterUneLicence1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAjouterUneLicence1ActionPerformed
