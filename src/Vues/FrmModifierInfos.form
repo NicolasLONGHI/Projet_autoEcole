@@ -284,9 +284,6 @@
       </Properties>
     </Component>
     <Component class="com.toedter.calendar.JDateChooser" name="dcDateNaissance">
-      <Properties>
-        <Property name="dateFormatString" type="java.lang.String" value=""/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -6,15 +6,10 @@ package Vues;
 
 import Controlers.CtrlUser;
 import Entities.User;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import java.util.logging.Logger;
-
 
 /**
  *
@@ -25,7 +20,6 @@ public class FrmModifierInfos extends javax.swing.JFrame {
     
     static User unUser;
     CtrlUser ctrlUser;
-    SimpleDateFormat sdf;
     
     /**
      * Creates new form FrmModifierInfos
@@ -121,8 +115,6 @@ public class FrmModifierInfos extends javax.swing.JFrame {
 
         buttonGroup1.add(rbFemme);
         rbFemme.setText("Femme");
-
-        dcDateNaissance.setDateFormatString("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -239,10 +231,9 @@ public class FrmModifierInfos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        dcDateNaissance.setDateFormatString("dd/MM/yyyy");
+        dcDateNaissance.setDateFormatString("dd/MM/y");
         ctrlUser = new CtrlUser();
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        sdf = new SimpleDateFormat("yyyy-MM-dd");
         
         txtNom.setText(unUser.getNom());
         txtPrenom.setText(unUser.getPrenom());
@@ -250,11 +241,7 @@ public class FrmModifierInfos extends javax.swing.JFrame {
         txtTelephone.setText(unUser.getTelephone());
         txtAdresse.setText(unUser.getAdresse());
         txtVille.setText(unUser.getVille());
-        try {
-            dcDateNaissance.setDate(sdf.parse(unUser.getDateDeNaissance()));
-        } catch (ParseException ex) {
-            Logger.getLogger(FrmModifierInfos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        dcDateNaissance.setDate(unUser.getDateDeNaissance());
         if (unUser.getSexe() == 0) {
             rbHomme.setSelected(true);
         }
@@ -271,7 +258,7 @@ public class FrmModifierInfos extends javax.swing.JFrame {
             sexe = 1;
         }
         unUser.setSexe(sexe);
-        unUser.setDateDeNaissance(sdf.format(dcDateNaissance.getDate()));
+        unUser.setDateDeNaissance(dcDateNaissance.getDate());
         unUser.setAdresse(txtAdresse.getText());
         unUser.setCodePostal(txtCodePostal.getText());
         unUser.setVille(txtVille.getText());

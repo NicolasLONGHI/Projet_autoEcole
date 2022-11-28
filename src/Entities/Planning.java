@@ -17,9 +17,9 @@ public class Planning {
     private Date date;
     private String heure;
     private double prix;
-    private String reglee;
+    private int reglee;
     
-    public Planning (String unLibelle, String unNom, String unPrenom, Date uneDate, String uneHeure, double unPrix, String unReglee) {
+    public Planning (String unLibelle, String unNom, String unPrenom, Date uneDate, String uneHeure, double unPrix, int unReglee) {
         libelle = unLibelle;
         nom = unNom;
         prenom = unPrenom;
@@ -116,14 +116,14 @@ public class Planning {
     /**
      * @return the reglee
      */
-    public String getReglee() {
+    public int getReglee() {
         return reglee;
     }
 
     /**
      * @param reglee the reglee to set
      */
-    public void setReglee(String reglee) {
+    public void setReglee(int reglee) {
         this.reglee = reglee;
     }
 }

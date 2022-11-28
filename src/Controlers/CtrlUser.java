@@ -34,7 +34,7 @@ public class CtrlUser {
             ps.setString(2, unMdp);
             rs = ps.executeQuery();
             if(rs.next()){
-                monUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5).toString(), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), 0);
+                monUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), 0);
             }
             ps.close();
             rs.close();
@@ -51,7 +51,7 @@ public class CtrlUser {
             ps.setString(2, unMdp);
             rs = ps.executeQuery();
             if(rs.next()){
-                monUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5).toString(), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), 1);
+                monUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), 1);
             }
             ps.close();
             rs.close();
@@ -61,48 +61,49 @@ public class CtrlUser {
         return monUser;
     }
     
-        public User GetConnexionResponsable(String unLogin, String unMdp){
-            User monUser = null;
-            try {
-                ps = cnx.prepareStatement("select CodeResponsable, Nom, Prenom, Sexe, DateDeNaissance, Adresse1, CodePostal, Ville, Telephone FROM responsable where login = ? and mdp = ?");
-                ps.setString(1, unLogin);
-                ps.setString(2, unMdp);
-                rs = ps.executeQuery();
-                if(rs.next()){
-                    monUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5).toString(), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), 2);
-                }
-                ps.close();
-                rs.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(CtrlUser.class.getName()).log(Level.SEVERE, null, ex);
+            public User GetConnexionResponsable(String unLogin, String unMdp){
+        User monUser = null;
+        try {
+            ps = cnx.prepareStatement("select CodeResponsable, Nom, Prenom, Sexe, DateDeNaissance, Adresse1, CodePostal, Ville, Telephone FROM responsable where login = ? and mdp = ?");
+            ps.setString(1, unLogin);
+            ps.setString(2, unMdp);
+            rs = ps.executeQuery();
+            if(rs.next()){
+                monUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getInt(4), rs.getDate(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), 2);
             }
-            return monUser;
+            ps.close();
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CtrlUser.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return monUser;
+    }
             
         public void MaJInfos(User unUser) {
             try {
-                String requete;
-                if (unUser.getStatut() == 0) {
-                    requete = "UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.DateDeNaissance = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;";
-                }
-                else if (unUser.getStatut() == 1) {
-                    requete = "UPDATE moniteur SET moniteur.Nom = ?, moniteur.Prenom = ?, moniteur.Sexe = ?, moniteur.DateDeNaissance = ?, moniteur.Adresse1 = ?, moniteur.CodePostal = ?, moniteur.Ville = ?, moniteur.Telephone = ? WHERE moniteur.CodeMoniteur = ?;";
-                }
-                else {
-                    requete = "responsable";
-                }
-                ps = cnx.prepareStatement(requete);
-                ps.setString(1, unUser.getNom());
-                ps.setString(2, unUser.getPrenom());
-                ps.setInt(3, unUser.getSexe());
-                ps.setString(4, unUser.getDateDeNaissance());
-                ps.setString(5, unUser.getAdresse());
-                ps.setString(6, unUser.getCodePostal());
-                ps.setString(7, unUser.getVille());
-                ps.setString(8, unUser.getTelephone());
-                ps.setInt(9, unUser.getCodeUser());
-                ps.executeUpdate();
-                ps.close();
+            //  "UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.DateDeNaissance = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;"
+               String requete;
+               if (unUser.getStatut() == 0) {
+                   requete = "UPDATE eleve SET eleve.Nom = ?, eleve.Prenom = ?, eleve.Sexe = ?, eleve.Adresse1 = ?, eleve.CodePostal = ?, eleve.Ville = ?, eleve.Telephone = ? WHERE eleve.CodeEleve = ?;";
+               }
+               else if (unUser.getStatut() == 1) {
+                   requete = "UPDATE moniteur SET moniteur.Nom = ?, moniteur.Prenom = ?, moniteur.Sexe = ?, moniteur.Adresse1 = ?, moniteur.CodePostal = ?, moniteur.Ville = ?, moniteur.Telephone = ? WHERE moniteur.CodeMoniteur = ?;";
+               }
+               else {
+                   requete = "responsable";
+               }
+               ps = cnx.prepareStatement(requete);
+               ps.setString(1, unUser.getNom());
+               ps.setString(2, unUser.getPrenom());
+               ps.setInt(3, unUser.getSexe());
+               ps.setString(4, unUser.getAdresse());
+               ps.setString(5, unUser.getCodePostal());
+               ps.setString(6, unUser.getVille());
+               ps.setString(7, unUser.getTelephone());
+               ps.setInt(8, unUser.getCodeUser());
+               ps.executeUpdate();
+               ps.close();
+
            } catch (SQLException ex) {
                Logger.getLogger(CtrlUser.class.getName()).log(Level.SEVERE, null, ex);
            }

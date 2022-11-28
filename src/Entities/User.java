@@ -12,7 +12,7 @@ public class User {
     private String nom;
     private String prenom;
     private int sexe;
-    private String dateDeNaissance;
+    private Date dateDeNaissance;
     private String adresse;
     private String codePostal;
     private String ville;
@@ -23,7 +23,7 @@ public class User {
         
     }
     
-    public User(int unCodeUser, String unNom, String unPrenom, int unSexe, String uneDateDeNaissance, String uneAdresse, String unCodePostal, String uneVille, String unTelephone, int unStatut) {
+    public User(int unCodeUser, String unNom, String unPrenom, int unSexe, Date uneDateDeNaissance, String uneAdresse, String unCodePostal, String uneVille, String unTelephone, int unStatut) {
         codeUser = unCodeUser;
         nom = unNom;
         prenom = unPrenom;
@@ -96,14 +96,14 @@ public class User {
     /**
      * @return the dateDeNaissance
      */
-    public String getDateDeNaissance() {
+    public Date getDateDeNaissance() {
         return dateDeNaissance;
     }
 
     /**
      * @param dateDeNaissance the dateDeNaissance to set
      */
-    public void setDateDeNaissance(String dateDeNaissance) {
+    public void setDateDeNaissance(Date dateDeNaissance) {
         this.dateDeNaissance = dateDeNaissance;
     }
 
